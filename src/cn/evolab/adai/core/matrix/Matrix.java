@@ -1,5 +1,7 @@
 package cn.evolab.adai.core.matrix;
 
-public class Matrix<T> {
+import java.util.ArrayList;
 
+public class Matrix<T> {
+	private ArrayList<Vector<T>> matrix;
 }
