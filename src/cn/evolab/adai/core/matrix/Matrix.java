@@ -83,6 +83,7 @@ public class Matrix<T> {
 		matrix.clear();
 	}
 	
+	@Override
 	public Matrix<T> clone() {
 		Matrix<T> tempM = new Matrix<T>(this.rowSize(), this.columnSize());
 		for(int i=0; i<this.rowSize(); i++) {

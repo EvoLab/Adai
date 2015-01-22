@@ -1,108 +1,70 @@
-import cn.evolab.adai.core.matrix.*;
+import cn.evolab.adai.ec.base.EvaluateFunction;
+import cn.evolab.adai.ec.base.GAOperation;
+import cn.evolab.adai.ec.core.Individual;
+import cn.evolab.adai.ec.core.stop.IterationsStopCondition;
+import cn.evolab.adai.ec.core.stop.StopCondition;
+import cn.evolab.adai.ec.ga.BinaryGA;
+import cn.evolab.adai.optimization.function.BinLsgoFunction;
+import cn.evolab.adai.optimization.function.MathFunction;
+import cn.evolab.adai.optimization.function.cec.*;
 
 public class Test {
 
-	public void run() throws MatrixException {
-		Matrix<Integer> m = new Matrix<Integer>(5, 10);
-		Matrix<Integer> m2 = new Matrix<Integer>();
-		for(int i=0; i<m.rowSize(); i++) {
-			for(int j=0; j<m.columnSize(); j++) {
-				m.setElement(i, j, i*j);
-			}
-		}
-		m2 = m.clone();
-		for(int i=0; i<m.rowSize(); i++) {
-			for(int j=0; j<m.columnSize(); j++) {
-				System.out.print(m.getElement(i, j)+"  ");
-			}
-			System.out.println();
-		}
-		System.out.println("----------");
-		for(int i=0; i<m2.rowSize(); i++) {
-			for(int j=0; j<m2.columnSize(); j++) {
-				System.out.print(m2.getElement(i, j)+"  ");
-			}
-			System.out.println();
-		}
-		System.out.println("----------");
-		for(int i=0; i<m.rowSize(); i++) {
-			for(int j=0; j<m.columnSize(); j++) {
-				m.setElement(i, j, 0);
-			}
-		}
-		for(int i=0; i<m2.rowSize(); i++) {
-			for(int j=0; j<m2.columnSize(); j++) {
-				System.out.print(m2.getElement(i, j)+"  ");
-			}
-			System.out.println();
-		}
-		System.out.println("----------");
+	public void run() throws Exception{
+		int popSize = 1000;
+		int individualSize = 1000;
+		double c_rate = 0.2;
+		double m_rate = 0.2;
+		int maxGen = 5;
 		
-	}
-	public void matrixTest() {
-		Matrix<Integer> m = new Matrix<Integer>(5, 10);
-		for(int i=0; i<m.rowSize(); i++) {
-			for(int j=0; j<m.columnSize(); j++) {
-				m.setElement(i, j, i*j);
-			}
+		// Step 0: Make a algorithm
+		BinaryGA myGA = new BinaryGA(popSize, individualSize);
+		
+		// Step 1: Make a solution for solving the final result
+		Individual<Boolean> solution = new Individual<Boolean>();
+		
+		// Step 2: Define a function, which be solved by the algorithm
+		int dimension=10;
+		Function f = new F1(new double[dimension]);
+		EvaluateFunction<Boolean> evaluate = new BinLsgoFunction(f);
+		
+		
+		// Step 4: Define some evolutionary operations for the population.
+		GAOperation operation = new GAOperation();
+		
+		// Step 5: Confirm the stop condition
+		StopCondition condition = new IterationsStopCondition(maxGen);
+		
+		myGA.popEvaluate(myGA.getPopulation(), solution, evaluate);
+		
+		
+		
+		for(int i=0; i<myGA.getPopulation().size(); i++) {
+			System.out.println(myGA.getPopulation().getIndividual(i).getFitness()+"  ");
 		}
-		for(int i=0; i<m.rowSize(); i++) {
-			for(int j=0; j<m.columnSize(); j++) {
-				System.out.print(m.getElement(i, j)+"  ");
-			}
-			System.out.println();
-		}
-		System.out.println("----------");
-
-		Vector<Integer> v = new Vector<Integer>();
-		v = m.getColumn(9);
-		for(int i=0; i<v.size(); i++) {
-			System.out.print(v.get(i)+"  ");
-		}
-		System.out.println();
+		System.out.println("BestFitness = "+solution.getFitness());
+		// Step 6: Run algorithm
+		// myGA.run(condition, evaluate, operation);
 		
 		
 	}
-	public void vectorTest() {
-		Vector<Integer> vector = new Vector<Integer>(10);
-		for(int i=0; i<10; i++) {
-			vector.set(i, i);
-		}
 
-		Vector<Integer> v2 = new Vector<Integer>();
-		
-		v2 = vector.clone();
-		for(int i=0; i<v2.size(); i++) {
-			System.out.print(v2.get(i)+"  ");
-		}
-		System.out.println(v2.size());
-
-
-		for(int i=0; i<10; i++) {
-			vector.set(i, i*i);
-		}
-		
-		for(int i=0; i<vector.size(); i++) {
-			System.out.print(vector.get(i)+"  ");
-		}
-		System.out.println(v2.size());
-		
-		v2.init(v2.size());
-		for(int i=0; i<v2.size(); i++) {
-			System.out.print(v2.get(i)+"  ");
-		}
-		System.out.println(v2.size());
-				
-	}
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Test t = new Test();
 		try {
 			t.run();
-		} catch (MatrixException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	private void p(String str) {
+		System.out.print(str);
+	}
+	private void pln(String str) {
+		System.out.println(str);
 	}
 
 }
