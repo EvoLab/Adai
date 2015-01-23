@@ -30,14 +30,15 @@ public class VectorEdit {
 	}
 	
 	
-	public static <Boolean> int booleanToInteger(Vector<Boolean> vector) {
+	public static double booleanToDouble(Vector<Boolean> vector) {
 		// Left value is the high position: [1 0 0] = 4
-		int tempValue = 0;
+		double tempValue = 0;
 		for(int i=0; i<vector.size(); i++) {
-			if((boolean) vector.get(i)) {
-				tempValue += Math.pow(2, vector.size()-1-i);
+			if(vector.get(i)) {
+				tempValue += (double)Math.pow(2, vector.size()-1-i);
 			}
 		}
+
 		return tempValue;
 	}
 	public static Vector<Boolean> integerToBoolean(int vectorSize, int value) {

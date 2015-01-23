@@ -11,7 +11,7 @@ import cn.evolab.adai.optimization.function.cec.*;
 public class Test {
 
 	public void run() throws Exception{
-		int popSize = 1000;
+		int popSize = 1;
 		int individualSize = 1000;
 		double c_rate = 0.2;
 		double m_rate = 0.2;
@@ -25,7 +25,7 @@ public class Test {
 		
 		// Step 2: Define a function, which be solved by the algorithm
 		int dimension=10;
-		Function f = new F1(new double[dimension]);
+		Function f = new F2(new double[dimension]);
 		EvaluateFunction<Boolean> evaluate = new BinLsgoFunction(f);
 		
 		

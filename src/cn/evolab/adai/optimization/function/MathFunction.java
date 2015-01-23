@@ -9,7 +9,7 @@ public class MathFunction extends EvaluateFunction<Boolean> {
 	@Override
 	public double getMinFitness(Individual<Boolean> individual) {
 		double fitness = 0.0;
-		fitness = VectorEdit.booleanToInteger(individual.get());
+		fitness = VectorEdit.booleanToDouble(individual.get());
 		return fitness;
 	}
 

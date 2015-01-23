@@ -2,7 +2,6 @@ package cn.evolab.adai.optimization.function;
 
 import cn.evolab.adai.ec.core.Individual;
 import cn.evolab.adai.optimization.function.cec.Function;
-import cn.evolab.adai.optimization.function.cec.LsgoFunction;
 
 public class BinLsgoFunction extends LsgoFunction<Boolean> {
 

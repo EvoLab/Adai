@@ -1,8 +1,10 @@
-package cn.evolab.adai.optimization.function.cec;
+package cn.evolab.adai.optimization.function;
 
 import cn.evolab.adai.core.matrix.Vector;
 import cn.evolab.adai.core.matrix.VectorEdit;
 import cn.evolab.adai.ec.base.EvaluateFunction;
+import cn.evolab.adai.optimization.function.cec.Function;
+import cn.evolab.adai.tools.Print;
 
 public abstract class LsgoFunction<T> extends EvaluateFunction<T>{
 	protected Function f;
@@ -31,11 +33,16 @@ public abstract class LsgoFunction<T> extends EvaluateFunction<T>{
 		int s=0;
 		int t=range-1;
 		for(int i=0; i<f.getDimension(); i++) {
-			int ix = VectorEdit.booleanToInteger(x.subVector(s, t));
+			Vector<Boolean> temp = x.subVector(s, t);
+			double ix = VectorEdit.booleanToDouble(temp);
+
 			dx[i] = (double)ix/(double)max;
 			s = t+1;
 			t = s+range-1;
+
 		}
+		System.out.println();
+
 		return dobuleCompute(dx);
 	}
 	public double intCompute(Vector<Integer> x, int range) {
