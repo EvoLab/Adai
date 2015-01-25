@@ -50,7 +50,6 @@ public class Vector<T> {
 	}
 
 	public Vector<T> subVector(int fromIndex, int toIndex) {
-		@SuppressWarnings("unchecked")
 		Vector<T> subList = new Vector<T>();
 		for(int i=fromIndex; i<=toIndex; i++) {
 			subList.add(this.get(i));

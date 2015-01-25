@@ -1,14 +1,15 @@
-package cn.evolab.adai.ec.core.operation;
+package cn.evolab.adai.ec.ga.operation;
 
 import java.util.Random;
 
 import cn.evolab.adai.ec.core.Population;
+import cn.evolab.adai.ec.ga.base.Selection;
 
 public class RouletteWheelSelection<T> extends Selection<T> {
-	private Population<T> nextPopulation;
 	public RouletteWheelSelection(int nextPopulationSize) {
-		this.nextPopulation = new Population<T>(nextPopulationSize);
+		super(nextPopulationSize);
 	}
+
 	@Override
 	public Population<T> run(Population<T> population, Population<T> offspring) {
 		
@@ -37,7 +38,7 @@ public class RouletteWheelSelection<T> extends Selection<T> {
 			if(r<q[0]) {
 				nextPopulation.setIndividual(i, population.getIndividual(0));
 			} else {
-				for(int j=i; j<population.size(); j++) {
+				for(int j=1; j<population.size(); j++) {
 					if(q[j-1]<=r && r<q[j]) {
 						nextPopulation.setIndividual(i, population.getIndividual(j));
 						break;

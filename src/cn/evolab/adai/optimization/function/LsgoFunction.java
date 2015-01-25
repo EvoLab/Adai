@@ -2,11 +2,10 @@ package cn.evolab.adai.optimization.function;
 
 import cn.evolab.adai.core.matrix.Vector;
 import cn.evolab.adai.core.matrix.VectorEdit;
-import cn.evolab.adai.ec.base.EvaluateFunction;
+import cn.evolab.adai.ec.core.FitnessFunction;
 import cn.evolab.adai.optimization.function.cec.Function;
-import cn.evolab.adai.tools.Print;
 
-public abstract class LsgoFunction<T> extends EvaluateFunction<T>{
+public abstract class LsgoFunction<T> extends FitnessFunction<T>{
 	protected Function f;
 	public LsgoFunction(Function f) {
 		this.f = f;

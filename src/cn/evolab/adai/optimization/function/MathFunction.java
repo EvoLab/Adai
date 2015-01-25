@@ -1,10 +1,10 @@
 package cn.evolab.adai.optimization.function;
 
 import cn.evolab.adai.core.matrix.VectorEdit;
-import cn.evolab.adai.ec.base.EvaluateFunction;
+import cn.evolab.adai.ec.core.FitnessFunction;
 import cn.evolab.adai.ec.core.Individual;
 
-public class MathFunction extends EvaluateFunction<Boolean> {
+public class MathFunction extends FitnessFunction<Boolean> {
 
 	@Override
 	public double getMinFitness(Individual<Boolean> individual) {

@@ -23,4 +23,22 @@ public class Print {
 			Print.individual(population.getIndividual(i));
 		}
 	}
+	public static void p(String str) {
+		System.out.print(str);
+	}
+	public static void pln(String str) {
+		System.out.println(str);
+	}
+	public static <T> void p(T list[]) {
+		for(int i=0; i<list.length; i++) {
+			System.out.print(list[i]+"\t");
+		}
+		System.out.println();
+	}
+	public static <T> void pln(T list[]) {
+		for(int i=0; i<list.length; i++) {
+			System.out.println(list[i]+"\t");
+		}
+	}
+	
 }

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Population<T> {
 	
-	private ArrayList< Individual<T> > population;
+	protected ArrayList< Individual<T> > population;
 	
 	public Population() {
 		population = new ArrayList< Individual<T> >();
@@ -69,8 +69,10 @@ public class Population<T> {
 	}
 	
 	public void addPopulation(Population<T> newPopulation) {
-		for(int i=0; i<newPopulation.size(); i++) {
-			this.addIndividual(newPopulation.getIndividual(i).clone());
+		if(newPopulation !=null) {
+			for(int i=0; i<newPopulation.size(); i++) {
+				this.addIndividual(newPopulation.getIndividual(i).clone());
+			}
 		}
 	}
 }

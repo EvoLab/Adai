@@ -1,7 +1,6 @@
-package cn.evolab.adai.ec.base;
+package cn.evolab.adai.ec.core;
 
-import cn.evolab.adai.ec.core.Individual;
-import cn.evolab.adai.ec.core.Population;
+import cn.evolab.adai.ec.core.operation.EAOperation;
 import cn.evolab.adai.ec.core.stop.StopCondition;
 
 public abstract class EA<T> {
@@ -13,18 +12,24 @@ public abstract class EA<T> {
 		popInitialization(population);
 	}
 
+	// population initialization
 	public abstract void popInitialization(Population<T> population);
+	
+	// update population
 	public void populationUpdate(Population<T> population) {
 		this.population = population.clone();
 	}
+	
+	// get population
 	public Population<T> getPopulation() {
 		return this.population;
 	}
+	// get best individual
 	public Individual<T> getBestIndividual() {
 		return this.best;
 	}
 	
-	
+	// update the best individual
 	public Individual<T> bestIndividualUpdate(Population<T> population, Individual<T> best) {
 		for(int i=0; i<population.size(); i++) {
 			if(population.getIndividual(i).getFitness()<best.getFitness()) {
@@ -34,31 +39,39 @@ public abstract class EA<T> {
 		return best;
 	}
 	
-	public Individual<T> popEvaluate(Population<T> population, Individual<T> best, EvaluateFunction<T> evaluate) {
+	// Evaluate the population, get fitness
+	// Return the best individual
+	public Individual<T> popEvaluate(Population<T> population, FitnessFunction<T> evaluate) {
 		for(int i=0; i<population.size(); i++) {
 			population.getIndividual(i).setFitness(evaluate.getMinFitness(population.getIndividual(i)));
 		}
 		return bestIndividualUpdate(population, best);
 	}
 	
-	public Population<T> offspringEvolution(Population<T> population, EAOperation<T> operation) {
-		Population<T>  offspring = new Population<T>();
-		offspring = operation.generateOffspring(population);
-		return offspring;
+	// Generate new offspring by EAOperations
+	public Population<T> generatOffspring(EAOperation<T> operation, Population<T> population) {
+		return operation.runRecombination(population);
 	}
 	
-	public Individual<T> run(StopCondition condition, EvaluateFunction<T> evaluate, EAOperation<T> operation) {
-		// Initialization
+	// Update population, return nextPopulation
+	public Population<T> populationUpdate(EAOperation<T> operation, Population<T> population, Population<T> offspring) {
+		return operation.runPopulationUpdate(population, offspring);
+	}
+	
+	// Run EA, return the best individual
+	public Individual<T> run(FitnessFunction<T> evaluate, EAOperation<T> operation, StopCondition condition) {
+		// Step 1: Initialization
 		Population<T> offspring = new Population<T>();
 		condition.init();
-		// Generation 0
-		best = this.popEvaluate(population, best, evaluate);
+		
+		// Step 2: Generation 0
+		best = this.popEvaluate(population, evaluate);
 		
 		// Evolution until stop
 		while (!condition.stop()) {
-			offspring = this.offspringEvolution(population, operation);
-			best = this.popEvaluate(offspring, best, evaluate);
-			population = operation.update(population, offspring);
+			offspring = this.generatOffspring(operation, population);
+			best = this.popEvaluate(offspring, evaluate);
+			population = operation.runPopulationUpdate(population, offspring);
 		}
 		
 		// Return the best individual
