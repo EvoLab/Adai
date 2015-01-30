@@ -17,10 +17,27 @@ public class Print {
 		}
 		System.out.println(": fitness = "+individual.getFitness());
 	}
+	public static <Boolean> void booleanIndividual(Individual<Boolean> individual) {
+		for(int i=0; i<individual.get().size(); i++) {
+			if((boolean) individual.get().get(i)) {
+				System.out.print(1 + "\t");
+			} else {
+				System.out.print(0 + "\t");
+			}
+		}
+		System.out.println(": fitness = "+individual.getFitness());
+		
+	}
 	public static <T> void population(Population<T> population) {
 		for(int i=0; i<population.size(); i++) {
 			System.out.print(i+":\t");
 			Print.individual(population.getIndividual(i));
+		}
+	}
+	public static <Boolean> void booleanPopulation(Population<Boolean> population) {
+		for(int i=0; i<population.size(); i++) {
+			System.out.print(i+":\t");
+			Print.booleanIndividual(population.getIndividual(i));
 		}
 	}
 	public static void p(String str) {

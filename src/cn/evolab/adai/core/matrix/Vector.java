@@ -96,5 +96,22 @@ public class Vector<T> {
 	public void removeAll(Vector<T> tmpVector){
 		vector.removeAll(tmpVector.vector);
 	}
-		
+	
+	// Others
+	public Matrix<T> vectorToMatrix(int rowSize, int columnSize) throws VectorException {
+		if(this.size()>=rowSize*columnSize) {
+			Matrix<T> matrix = new Matrix<T>(rowSize, columnSize);
+			int index = 0;
+			for(int i=0; i<rowSize; i++) {
+				for(int j=0; j<columnSize; j++) {
+					matrix.setElement(i, j, this.get(index));
+					index++;
+				}
+			}
+			return matrix;
+			
+		} else {
+			throw new VectorException("Vector Size is less than Matrix Size");
+		}
+	}
 }

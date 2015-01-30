@@ -3,7 +3,6 @@ package cn.evolab.adai.ec.core.operation;
 import java.util.ArrayList;
 
 import cn.evolab.adai.ec.core.Population;
-import cn.evolab.adai.tools.Print;
 
 public abstract class EAOperation<T> {
 	private Population<T> offspring;
@@ -17,6 +16,12 @@ public abstract class EAOperation<T> {
 		offspring = new Population<T>();
 		nextPopulation = new Population<T>();
 	}
+	
+	public void init() {
+		offspring = new Population<T>();
+		nextPopulation = new Population<T>();		
+	}
+	
 	public void addRecombination(Recombination<T> recombination) {
 		OperationList.add(recombination);
 	}
@@ -45,11 +50,12 @@ public abstract class EAOperation<T> {
 	
 	public Population<T> runRecombination(Population<T> population) {
 		for(int i=0; i<OperationList.size(); i++) {
-			offspring.addPopulation(this.OperationList.get(i).run(population));
+			offspring.addPopulation(this.OperationList.get(i).run(population).clone());
 		}
 		return offspring;
 	}
-	public Population<T>  runPopulationUpdate(Population<T> population, Population<T> offspring) {
+	
+	public Population<T>  runPopulationUpdate(Population<T> population, Population<T> offspring) {		
 		for(int i=0; i<PopUpdateList.size(); i++) {
 			nextPopulation.addPopulation(this.PopUpdateList.get(i).run(population, offspring));
 		}

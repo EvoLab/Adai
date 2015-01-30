@@ -2,6 +2,7 @@ package cn.evolab.adai.ec.core;
 
 import cn.evolab.adai.ec.core.operation.EAOperation;
 import cn.evolab.adai.ec.core.stop.StopCondition;
+import cn.evolab.adai.tools.Print;
 
 public abstract class EA<T> {
 	protected Population<T> population;
@@ -44,6 +45,7 @@ public abstract class EA<T> {
 	public Individual<T> popEvaluate(Population<T> population, FitnessFunction<T> evaluate) {
 		for(int i=0; i<population.size(); i++) {
 			population.getIndividual(i).setFitness(evaluate.getMinFitness(population.getIndividual(i)));
+
 		}
 		return bestIndividualUpdate(population, best);
 	}
@@ -69,9 +71,19 @@ public abstract class EA<T> {
 		
 		// Evolution until stop
 		while (!condition.stop()) {
+			// Generate offspring
 			offspring = this.generatOffspring(operation, population);
+			
+			// evaluate and get fitness(minimize)
 			best = this.popEvaluate(offspring, evaluate);
+
+			// selection for the next iteration
 			population = operation.runPopulationUpdate(population, offspring);
+			
+			// update for next generation
+			condition.update(offspring.size(), best.getFitness());
+			operation.init();
+			Print.pln("best="+best.getFitness());
 		}
 		
 		// Return the best individual

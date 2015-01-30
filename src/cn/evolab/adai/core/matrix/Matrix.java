@@ -71,7 +71,7 @@ public class Matrix<T> {
 	public void addColumn(int index, Vector<T> vector) {
 		
 	}
-	
+		
 	// Remove
 	public void removeRow(int index) {
 		
@@ -83,7 +83,6 @@ public class Matrix<T> {
 		matrix.clear();
 	}
 	
-	@Override
 	public Matrix<T> clone() {
 		Matrix<T> tempM = new Matrix<T>(this.rowSize(), this.columnSize());
 		for(int i=0; i<this.rowSize(); i++) {
@@ -92,6 +91,17 @@ public class Matrix<T> {
 			}
 		}
 		return tempM;
+	}
+	
+	// Others
+	public Vector<T> matrixToVector() {
+		Vector<T> vector = new Vector<T>();
+		for(int i=0; i<this.rowSize(); i++) {
+			for(int j=0; j<this.columnSize(); j++) {
+				vector.add(this.getElement(i, j));
+			}
+		}
+		return vector;
 	}
 	
 }

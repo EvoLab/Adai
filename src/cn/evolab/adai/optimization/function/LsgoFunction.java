@@ -40,8 +40,6 @@ public abstract class LsgoFunction<T> extends FitnessFunction<T>{
 			t = s+range-1;
 
 		}
-		System.out.println();
-
 		return dobuleCompute(dx);
 	}
 	public double intCompute(Vector<Integer> x, int range) {

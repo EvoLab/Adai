@@ -21,6 +21,7 @@ public abstract class StopCondition {
 	}
 	public void update(int offspringSize, double bestFitness) {
 		iterations++;
+		this.offspringNums += offspringSize;
 		this.bestFitness=bestFitness;
 		this.computationTime = System.currentTimeMillis() - startTime;
 	}

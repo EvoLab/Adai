@@ -47,7 +47,6 @@ public class RouletteWheelSelection<T> extends Selection<T> {
 				
 			}
 		}
-		
 		return nextPopulation;
 	}
 
