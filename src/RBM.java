@@ -1,13 +1,11 @@
-package cn.evolab.adai.ml;
+
 
 import cn.evolab.adai.core.matrix.Vector;
-import cn.evolab.adai.ml.core.HiddenUnits;
-import cn.evolab.adai.ml.core.NetUnits;
-import cn.evolab.adai.ml.core.VisibleUnits;
-import cn.evolab.adai.ml.core.Weight;
+
 
 public class RBM<VT, WT, HT> {
 	
+	/*
 	protected VisibleUnits<VT> visibleUnits, newVisibleUnits;
 	protected HiddenUnits<HT> hiddenUnits;
 	protected NetUnits<WT> netUnits;
@@ -17,7 +15,7 @@ public class RBM<VT, WT, HT> {
 	protected double error;
 
 	// Parameters
-	protected Weight<WT> weight;
+	protected NetParameter<WT> weight;
 	protected Vector<WT> aBiasVector;
 	protected Vector<WT> bBiasVector;
 
@@ -27,7 +25,7 @@ public class RBM<VT, WT, HT> {
 		hiddenUnits = new HiddenUnits<HT>(hiddenSize);
 		netUnits = new NetUnits<WT>(hiddenSize);
 		
-		weight = new Weight<WT>(visibleSize, hiddenSize);
+		weight = new NetParameter<WT>(visibleSize, hiddenSize);
 		aBiasVector = new Vector<WT>(visibleSize);
 		bBiasVector = new Vector<WT>(hiddenSize);
 		
@@ -37,7 +35,7 @@ public class RBM<VT, WT, HT> {
 	}
 	
 	// update parameter
-	public void update (Weight<WT> weight, Vector<WT> aBiasVector, Vector<WT> bBiasVector) {
+	public void update (NetParameter<WT> weight, Vector<WT> aBiasVector, Vector<WT> bBiasVector) {
 		this.setWeight(weight);
 		this.setaBiasVector(aBiasVector);
 		this.setbBiasVector(bBiasVector);
@@ -64,7 +62,7 @@ public class RBM<VT, WT, HT> {
 	}
 	
 	// step 2: get net units: netUnits = run(visibleUnits, weight)
-	public NetUnits<WT> runNetUnits(VisibleUnits<VT> visibleUnits, Weight<WT> weight) {
+	public NetUnits<WT> runNetUnits(VisibleUnits<VT> visibleUnits, NetParameter<WT> weight) {
 		
 		return netUnits;
 	}
@@ -113,11 +111,11 @@ public class RBM<VT, WT, HT> {
 		this.bBias = bBias;
 	}
 
-	public Weight<WT> getWeight() {
+	public NetParameter<WT> getWeight() {
 		return weight;
 	}
 
-	public void setWeight(Weight<WT> weight) {
+	public void setWeight(NetParameter<WT> weight) {
 		this.weight = weight;
 	}
 
@@ -144,5 +142,5 @@ public class RBM<VT, WT, HT> {
 	public void setNetUnits(NetUnits<WT> netUnits) {
 		this.netUnits = netUnits;
 	}
-	
+	*/
 }

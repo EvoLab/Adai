@@ -1,5 +1,6 @@
 package cn.evolab.adai.tools;
 
+import cn.evolab.adai.core.matrix.Matrix;
 import cn.evolab.adai.core.matrix.Vector;
 import cn.evolab.adai.ec.core.Individual;
 import cn.evolab.adai.ec.core.Population;
@@ -55,6 +56,14 @@ public class Print {
 	public static <T> void pln(T list[]) {
 		for(int i=0; i<list.length; i++) {
 			System.out.println(list[i]+"\t");
+		}
+	}
+	public static <T> void matrix(Matrix<T> matrix) {
+		for(int i=0; i<matrix.rowSize(); i++) {
+			for(int j=0; j<matrix.columnSize(); j++) {
+				System.out.print(matrix.getElement(i, j)+"\t");
+			}
+			System.out.println();
 		}
 	}
 	

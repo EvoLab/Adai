@@ -47,25 +47,17 @@ public class Matrix<T> {
 	
 	// Add
 	public void addRow(Vector<T> vector) throws MatrixException {
-		try{
-			if(vector.size()!=this.columnSize()) {
-				throw new MatrixException("NewVectorSize != MatrixColumnSize");
-			} else {
-				matrix.add(vector);
-			}
-		} catch (MatrixException e) {
-			throw e;
+		if(vector.size()!=this.columnSize()) {
+			throw new MatrixException("NewVectorSize != MatrixColumnSize");
+		} else {
+			matrix.add(vector);
 		}
 	}
 	public void addRow(int index, Vector<T> vector) throws MatrixException {
-		try{
-			if(vector.size()!=this.columnSize()) {
-				throw new MatrixException("NewVectorSize != MatrixColumnSize");
-			} else {
-				matrix.add(index, vector);
-			}
-		} catch (MatrixException e) {
-			throw e;
+		if(vector.size()!=this.columnSize()) {
+			throw new MatrixException("NewVectorSize != MatrixColumnSize");
+		} else {
+			matrix.add(index, vector);
 		}
 	}
 	public void addColumn(int index, Vector<T> vector) {
@@ -102,6 +94,17 @@ public class Matrix<T> {
 			}
 		}
 		return vector;
+	}
+	
+	public Matrix<T> transpose() {
+		Matrix<T> output = new Matrix<T>(this.columnSize(), this.rowSize());
+		for(int i=0; i<this.columnSize(); i++) {
+			for(int j=0; j<this.rowSize(); j++) {
+				output.setElement(i, j, this.getElement(j, i));
+			}
+		}
+		
+		return output;
 	}
 	
 }
