@@ -2,6 +2,7 @@ package cn.evolab.adai.core.matrix;
 
 import java.util.ArrayList;
 
+
 public class Vector<T> {
 	private ArrayList<T> vector;
 	
@@ -39,14 +40,83 @@ public class Vector<T> {
 		return vector.size();
 	}
 	
+	@Override
 	public Vector<T> clone() {
 		Vector<T> tempT = new Vector<T>();
 		for(int i=0; i<vector.size(); i++) {
 			tempT.add(i, vector.get(i));
+<<<<<<< HEAD
+		}
+		return tempT;
+=======
 		}
 		return tempT;
 	}
+
+	public Vector<T> subVector(int fromIndex, int toIndex) {
+		Vector<T> subList = new Vector<T>();
+		for(int i=fromIndex; i<=toIndex; i++) {
+			subList.add(this.get(i));
+		}
+		return subList;
+	}
 	
-	// ToDo: other functions of ArrayList
-	// public boolean isEmpty() {}
+	public void addAll(Vector<T> tmpVector) {
+		vector.addAll(tmpVector.vector);
+	}
+	
+	public void addAll(int index, Vector<T> tmpVector) {
+		vector.addAll(index, tmpVector.vector);
+	}
+	
+	public void clear() { 
+		vector.clear();
+>>>>>>> origin/master
+	}
+	
+	public boolean contains(T element){
+		return vector.contains(element);
+	}
+	
+	public boolean equals(Vector<T> tmpVector) {
+		return vector.equals(tmpVector.vector);
+	}
+	
+	public int indexOf(T element) {
+		return vector.indexOf(element);
+	}
+	
+	public boolean isEmpty() {
+		return vector.isEmpty();
+	}
+	
+	public void remove(T element){
+		vector.remove(element);
+	}
+	
+	public void remove(int index){
+		vector.remove(index);
+	}
+	
+	public void removeAll(Vector<T> tmpVector){
+		vector.removeAll(tmpVector.vector);
+	}
+	
+	// Others
+	public Matrix<T> vectorToMatrix(int rowSize, int columnSize) throws VectorException {
+		if(this.size()>=rowSize*columnSize) {
+			Matrix<T> matrix = new Matrix<T>(rowSize, columnSize);
+			int index = 0;
+			for(int i=0; i<rowSize; i++) {
+				for(int j=0; j<columnSize; j++) {
+					matrix.setElement(i, j, this.get(index));
+					index++;
+				}
+			}
+			return matrix;
+			
+		} else {
+			throw new VectorException("Vector Size is less than Matrix Size");
+		}
+	}
 }
