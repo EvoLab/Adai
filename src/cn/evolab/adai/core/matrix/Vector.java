@@ -40,11 +40,11 @@ public class Vector<T> {
 	}
 	
 	public Vector<T> clone() {
-		Vector<T> temp_v = new Vector<T>();
+		Vector<T> tempT = new Vector<T>();
 		for(int i=0; i<vector.size(); i++) {
-			temp_v.add(i, vector.get(i));
+			tempT.add(i, vector.get(i));
 		}
-		return temp_v;
+		return tempT;
 	}
 	
 	// ToDo: other functions of ArrayList
